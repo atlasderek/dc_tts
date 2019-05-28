@@ -17,8 +17,10 @@ fpaths, _, _ = load_data() # list
 
 for fpath in tqdm.tqdm(fpaths):
     fname, mel, mag = load_spectrograms(fpath)
-    if not os.path.exists(os.path.join(hp.data, "mels")): os.mkdir(os.path.join(hp.data, "mels"))
-    if not os.path.exists(os.path.join(hp.data, "mags")): os.mkdir(os.path.join(hp.data, "mags"))
+    if not os.path.exists(os.path.join(hp.data, "mels")):
+        os.mkdir(os.path.join(hp.data, "mels"))
+    if not os.path.exists(os.path.join(hp.data, "mags")):
+        os.mkdir(os.path.join(hp.data, "mags"))
 
     np.save(os.path.join(hp.data, "mels", "{}".format(fname.replace("wav", "npy"))), mel)
     np.save(os.path.join(hp.data, "mags", "{}".format(fname.replace("wav", "npy"))), mag)

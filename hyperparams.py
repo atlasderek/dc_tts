@@ -6,7 +6,7 @@ https://www.github.com/kyubyong/dc_tts
 class Hyperparams:
     '''Hyper parameters'''
     # pipeline
-    prepro = False  # if True, run `python prepro.py` first before running `python train.py`.
+    prepro = True  # if True, run `python prepro.py` first before running `python train.py`.
 
     # signal processing
     sr = 22050  # Sampling rate.
