@@ -1,11 +1,7 @@
-# -*- coding: utf-8 -*-
-#/usr/bin/python2
 '''
 By kyubyong park. kbpark.linguist@gmail.com. 
 https://www.github.com/kyubyong/dc_tts
 '''
-
-from __future__ import print_function
 
 from hyperparams import Hyperparams as hp
 import numpy as np
@@ -78,7 +74,7 @@ def load_data(mode="train"):
 
     else: # synthesize on unseen test text.
         # Parse
-        lines = codecs.open(hp.test_data, 'r', 'utf-8').readlines()[1:]
+        lines = open(hp.test_data, 'r').readlines()[1:]
         sents = [text_normalize(line.split(" ", 1)[-1]).strip() + "E" for line in lines] # text normalization, E: EOS
         texts = np.zeros((len(sents), hp.max_N), np.int32)
         for i, sent in enumerate(sents):

@@ -1,0 +1,3 @@
+librosa
+tensorflow>=1.12.0
+tqdm

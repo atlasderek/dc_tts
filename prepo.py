@@ -1,11 +1,9 @@
-# -*- coding: utf-8 -*-
-#/usr/bin/python2
 '''
 By kyubyong park. kbpark.linguist@gmail.com.
 https://www.github.com/kyubyong/dc_tts
 '''
 
-from __future__ import print_function
+# from __future__ import print_function
 
 from utils import load_spectrograms
 import os
