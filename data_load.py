@@ -7,7 +7,7 @@ from hyperparams import Hyperparams as hp
 import numpy as np
 import tensorflow as tf
 from utils import *
-import codecs
+# import codecs
 import re
 import os
 import unicodedata
@@ -39,7 +39,7 @@ def load_data(mode="train"):
             # Parse
             fpaths, text_lengths, texts = [], [], []
             transcript = os.path.join(hp.data, 'transcript.csv')
-            lines = codecs.open(transcript, 'r', 'utf-8').readlines()
+            lines = open(transcript, 'r').readlines()
             for line in lines:
                 fname, _, text = line.strip().split("|")
 
@@ -56,7 +56,7 @@ def load_data(mode="train"):
             # Parse
             fpaths, text_lengths, texts = [], [], []
             transcript = os.path.join(hp.data, 'transcript.csv')
-            lines = codecs.open(transcript, 'r', 'utf-8').readlines()
+            lines = open(transcript, 'r').readlines()
             for line in lines:
                 fname, _, text, is_inside_quotes, duration = line.strip().split("|")
                 duration = float(duration)
@@ -101,8 +101,12 @@ def get_batch():
         if hp.prepro:
             def _load_spectrograms(fpath):
                 fname = os.path.basename(fpath)
-                melp = os.path.join(hp.data, "mels", "{}".format(fname.decode("utf-8").replace("wav", "npy")))
-                magp = os.path.join(hp.data, "mags", "{}".format(fname.decode("utf-8").replace("wav", "npy")))
+                try:
+                    melp = os.path.join(hp.data, "mels", "{}".format(fname.replace("wav", "npy")))
+                    magp = os.path.join(hp.data, "mags", "{}".format(fname.replace("wav", "npy")))
+                except TypeError:
+                    melp = os.path.join(hp.data, "mels", "{}".format(fname.decode("utf-8").replace("wav", "npy")))
+                    magp = os.path.join(hp.data, "mags", "{}".format(fname.decode("utf-8").replace("wav", "npy")))
                 mel = np.load(melp)
                 mag = np.load(magp)
                 return fname, mel, mag

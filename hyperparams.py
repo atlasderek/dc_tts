@@ -31,7 +31,8 @@ class Hyperparams:
     attention_win_size = 3
 
     # data
-    data = "/home/derek/PythonProjects/datasets/LJSpeech-1.1"
+    # data = "/home/derek/PythonProjects/datasets/LJSpeech-1.1"
+    data = "/home/derek/PycharmProjects/atlas/dc_tts/data/LJSpeech-1.1"
     # data = "/data/private/voice/kate"
     test_data = 'harvard_sentences.txt'
     vocab = "PE abcdefghijklmnopqrstuvwxyz'.?"  # P: Padding, E: EOS.
