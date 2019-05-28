@@ -50,7 +50,7 @@ def load_data(mode="train"):
                 text = [char2idx[char] for char in text]
                 text_lengths.append(len(text))
                 texts.append(np.array(text, np.int32).tostring())
-
+            # fpath is .../LJSpeechx_x/wavs/file.wav
             return fpaths, text_lengths, texts
         else: # nick or kate
             # Parse
@@ -85,6 +85,7 @@ def get_batch():
     """Loads training data and put them in queues"""
     with tf.device('/cpu:0'):
         # Load data
+        # LJS fpath is .../LJSpeechx_x/wavs/file.wav
         fpaths, text_lengths, texts = load_data() # list
         maxlen, minlen = max(text_lengths), min(text_lengths)
 
@@ -100,8 +101,8 @@ def get_batch():
         if hp.prepro:
             def _load_spectrograms(fpath):
                 fname = os.path.basename(fpath)
-                mel = "mels/{}".format(fname.replace("wav", "npy"))
-                mag = "mags/{}".format(fname.replace("wav", "npy"))
+                mel = os.path.join(hp.data, "mels", "{}".format(fname.replace("wav", "npy")))
+                mag = os.path.join(hp.data, "mags", "{}".format(fname.replace("wav", "npy")))
                 return fname, np.load(mel), np.load(mag)
 
             fname, mel, mag = tf.py_func(_load_spectrograms, [fpath], [tf.string, tf.float32, tf.float32])
